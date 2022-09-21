@@ -1,7 +1,7 @@
 {
   "name": "Darkblock Extension",
   "description": "Darkblock Chrome Browser Extension for Consuming Unlockable Content",
-  "version": "0.2",
+  "version": "0.3",
   "manifest_version": 3,
   "icons": { "16": "icon16.png",
            "48": "icon48.png",
@@ -9,7 +9,22 @@
   "content_scripts": [
     {
       "matches": ["https://opensea.io/*"],
-      "js": ["content.js"],
+      "js": ["content/opensea.js"],
+      "css": ["content.css"]
+    },
+    {
+      "matches": ["https://magiceden.io/*"],
+      "js": ["content/magiceden.js"],
+      "css": ["content.css"]
+    },
+    {
+    "matches": ["https://exchange.art/*"],
+      "js": ["content/exchangeart.js"],
+      "css": ["content.css"]
+    },
+    {
+      "matches": ["https://solsea.io/*"],
+      "js": ["content/solsea.js"],
       "css": ["content.css"]
     }
   ]
