@@ -69,9 +69,9 @@ const getDarkblockPlatform = chain => {
 const getDarkblockIframeURL = (NFTData, platform) => {
 
     if (platform == "sol")
-        return `https://staging.darkblock.io/platform/sol/embed/add/${ NFTData.tokenID }`
+        return `https://app.darkblock.io/platform/sol/embed/viewer/${ NFTData.tokenID }`
 
-    return `https://staging.darkblock.io/platform/${ platform }/embed/add/${ NFTData.contractAddress }/${ NFTData.tokenID }`
+    return `https://app.darkblock.io/platform/${ platform }/embed/viewer/${ NFTData.contractAddress }/${ NFTData.tokenID }`
 
 }
 
@@ -93,8 +93,7 @@ const appendIframeContainer = async () => {
                                     allowfullscreen=“allowfullscreen” mozallowfullscreen=“mozallowfullscreen” msallowfullscreen=“msallowfullscreen” oallowfullscreen=“oallowfullscreen” webkitallowfullscreen=“webkitallowfullscreen”
                                     src="${ getDarkblockIframeURL(NFTData, platform) }">
                                 </iframe>
-                            </div>`
-
+                            </div>`                           
 
     offerContainer.insertAdjacentHTML("afterend", iframeContainer)
 
