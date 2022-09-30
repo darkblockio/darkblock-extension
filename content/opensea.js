@@ -90,7 +90,8 @@ const appendIframeContainer = async () => {
                                 <iframe
                                     style="border: none; height: 550px; width: 100%; padding: 5px;"
                                     title="darkblock"
-                                    src="${ getDarkblockIframeURL(NFTData, platform) }">
+                                    src="${ getDarkblockIframeURL(NFTData, platform) }"
+                                    allowfullscreen=“allowfullscreen” mozallowfullscreen=“mozallowfullscreen” msallowfullscreen=“msallowfullscreen” oallowfullscreen=“oallowfullscreen” webkitallowfullscreen=“webkitallowfullscreen”>
                                 </iframe>
                             </div>`
 
