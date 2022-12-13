@@ -8,18 +8,13 @@ const waitForElement = selector => {
     return new Promise(resolve => {
 
         const loop = () => {
-
             const element = document.querySelector(selector)
-
             if (element)
                 return resolve(element)
-
-            setTimeout(loop, 1000)
-
         }
 
-        loop()
-
+        setTimeout(loop, 1000)
+        // loop()
     })
 }
 
@@ -37,19 +32,33 @@ const appendIframeContainer = async () => {
 
     const tokenID = getTokenID()
 
-    const importantMessageContainer = await waitForElement("[class^=important-message__InfoSection]")
-    const iframeContainer = `<div class="opensea-ext--data-container "width: ${ importantMessageContainer.getBoundingClientRect().width }px">
-                                <iframe
-                                    style="border: none; height: 550px; width: 100%; padding: 5px;"
-                                    title="darkblock"
-                                    src="https://app.darkblock.io/platform/sol/embed/viewer/${ tokenID }"
-                                    allowfullscreen=“allowfullscreen” mozallowfullscreen=“mozallowfullscreen” msallowfullscreen=“msallowfullscreen” oallowfullscreen=“oallowfullscreen” webkitallowfullscreen=“webkitallowfullscreen”>
-                                </iframe>
-                            </div>`
+    // const importantMessageContainer = await waitForElement("[class^=important-message__InfoSection]")
+    // const iframeContainer = `<div class="opensea-ext--data-container "width: ${ importantMessageContainer.getBoundingClientRect().width }px">
+    //                             <iframe
+    //                                 style="border: none; height: 550px; width: 100%; padding: 5px;"
+    //                                 title="darkblock"
+    //                                 src="https://app.darkblock.io/platform/sol/embed/viewer/${ tokenID }"
+    //                                 allowfullscreen=“allowfullscreen” mozallowfullscreen=“mozallowfullscreen” msallowfullscreen=“msallowfullscreen” oallowfullscreen=“oallowfullscreen” webkitallowfullscreen=“webkitallowfullscreen”>
+    //                             </iframe>
+    //                         </div>`
 
+    // importantMessageContainer.insertAdjacentHTML("afterend", iframeContainer)
 
-    importantMessageContainer.insertAdjacentHTML("afterend", iframeContainer)
+    const importantMessageContainer = await waitForElement("[class^=info-column__NFTPage_Pqio1]")
 
+    let widgetDiv = document.createElement('div')
+    widgetDiv.setAttribute('id', 'darkblock-widget-embed')
+    widgetDiv.setAttribute('style', "padding: 5px; width:100%; background-color:white;")
+
+    let widgetScript = document.createElement('script')
+    widgetScript.setAttribute('type', 'module')
+    widgetScript.setAttribute('id', 'darkblockwidget-script')
+    widgetScript.setAttribute('data-config', "{'platform':'Solana', 'tokenId': '28qnjJqxMeVJFRyNDp8yfGwd5DRsRYtoUnQncHWtyfRb'}")
+    widgetScript.setAttribute('src', 'https://main--reliable-brigadeiros-e04b05.netlify.app/darkblock-widget-latest.js')
+
+    // importantMessageContainer.insertAdjacentElement('afterend', widgetDiv)
+    importantMessageContainer.appendChild(widgetDiv)
+    document.body.appendChild(widgetScript)
 }
 
 /* Opensea works with dynamic pages. We have to track the URL change and only if that happens - attempt to append the iframe. */
@@ -65,7 +74,7 @@ const trackURLChange = () => {
             return
 
         appendIframeContainer()
-        
+
         oldURL = currentURL
 
     }, 1000)
