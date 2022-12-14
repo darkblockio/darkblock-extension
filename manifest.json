@@ -31,7 +31,7 @@
   "web_accessible_resources": [
     {
       "matches": ["https://solsea.io/*"],
-      "resources": ["content/darkblock-widget-latest.js"]
+      "resources": ["darkblock-widget-latest.js"]
     }
  ]
 }
