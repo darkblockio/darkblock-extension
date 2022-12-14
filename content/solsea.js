@@ -35,7 +35,7 @@ const appendIframeContainer = async () => {
 
     let widgetContainer = document.createElement('div')
     widgetContainer.setAttribute('id', 'darkblock-widget-embed')
-    widgetContainer.setAttribute('style', "padding: 5px; width:100%; background-color:white;")
+    widgetContainer.setAttribute('style', "padding: 5px; width:100%;")
 
     let widgetScript = document.createElement('script')
     widgetScript.setAttribute('type', 'module')
