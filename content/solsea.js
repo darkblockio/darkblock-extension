@@ -33,9 +33,9 @@ const appendIframeContainer = async () => {
     const tokenID = getTokenID()
     const importantMessageContainer = await waitForElement("[class^=important-message__InfoSection]")
 
-    let widgetDiv = document.createElement('div')
-    widgetDiv.setAttribute('id', 'darkblock-widget-embed')
-    widgetDiv.setAttribute('style', "padding: 5px; width:100%; background-color:white;")
+    let widgetContainer = document.createElement('div')
+    widgetContainer.setAttribute('id', 'darkblock-widget-embed')
+    widgetContainer.setAttribute('style', "padding: 5px; width:100%; background-color:white;")
 
     let widgetScript = document.createElement('script')
     widgetScript.setAttribute('type', 'module')
@@ -43,7 +43,7 @@ const appendIframeContainer = async () => {
     widgetScript.setAttribute('data-config', `{'platform':'Solana', 'tokenId': '${tokenID}'}`)
     widgetScript.setAttribute('src', chrome.runtime.getURL("darkblock-widget-latest.js") )
 
-    importantMessageContainer.insertAdjacentElement('afterend', widgetDiv)
+    importantMessageContainer.insertAdjacentElement('afterend', widgetContainer)
     document.body.appendChild(widgetScript)
 }
 
