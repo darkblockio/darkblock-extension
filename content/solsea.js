@@ -44,6 +44,9 @@ const appendIframeContainer = async () => {
 
     // importantMessageContainer.insertAdjacentHTML("afterend", iframeContainer)
 
+    console.log('is loaded? ', 'chrome-extension://__MSG_@@extension_id__/content/darkblock-widget-latest.js');
+    // console.log('is loaded? ', chrome.extension.getUrl('content/darkblock-widget-latest.js'));
+
     const importantMessageContainer = await waitForElement("[class^=info-column__NFTPage_Pqio1]")
 
     let widgetDiv = document.createElement('div')
@@ -54,7 +57,8 @@ const appendIframeContainer = async () => {
     widgetScript.setAttribute('type', 'module')
     widgetScript.setAttribute('id', 'darkblockwidget-script')
     widgetScript.setAttribute('data-config', "{'platform':'Solana', 'tokenId': '28qnjJqxMeVJFRyNDp8yfGwd5DRsRYtoUnQncHWtyfRb'}")
-    widgetScript.setAttribute('src', 'https://main--reliable-brigadeiros-e04b05.netlify.app/darkblock-widget-latest.js')
+    // widgetScript.setAttribute('src', 'https://main--reliable-brigadeiros-e04b05.netlify.app/darkblock-widget-latest.js')
+    widgetScript.setAttribute('src', chrome.extension.getUrl('content/darkblock-widget-latest.js'))
 
     // importantMessageContainer.insertAdjacentElement('afterend', widgetDiv)
     importantMessageContainer.appendChild(widgetDiv)

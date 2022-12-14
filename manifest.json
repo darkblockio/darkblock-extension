@@ -27,5 +27,11 @@
       "js": ["content/solsea.js"],
       "css": ["content.css"]
     }
-  ]
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": ["https://solsea.io/*"],
+      "resources": ["content/darkblock-widget-latest.js"]
+    }
+ ]
 }
