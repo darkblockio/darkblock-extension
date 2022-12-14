@@ -30,7 +30,11 @@
   ],
   "web_accessible_resources": [
     {
-      "matches": ["https://solsea.io/*", "https://magiceden.io/*"],
+      "matches": [
+        "https://solsea.io/*",
+        "https://magiceden.io/*",
+        "https://exchange.art/*"
+      ],
       "resources": ["darkblock-widget-latest.js"]
     }
  ]
