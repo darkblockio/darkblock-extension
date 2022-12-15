@@ -8,18 +8,13 @@ const waitForElement = selector => {
     return new Promise(resolve => {
 
         const loop = () => {
-
             const element = document.querySelector(selector)
-
             if (element)
                 return resolve(element)
-
-            setTimeout(loop, 1000)
-
         }
 
-        loop()
-
+        setTimeout(loop, 1000)
+        // loop()
     })
 }
 
@@ -36,20 +31,20 @@ const appendIframeContainer = async () => {
         return
 
     const tokenID = getTokenID()
-
     const importantMessageContainer = await waitForElement("[class^=important-message__InfoSection]")
-    const iframeContainer = `<div class="opensea-ext--data-container "width: ${ importantMessageContainer.getBoundingClientRect().width }px">
-                                <iframe
-                                    style="border: none; height: 550px; width: 100%; padding: 5px;"
-                                    title="darkblock"
-                                    src="https://app.darkblock.io/platform/sol/embed/viewer/${ tokenID }"
-                                    allowfullscreen=“allowfullscreen” mozallowfullscreen=“mozallowfullscreen” msallowfullscreen=“msallowfullscreen” oallowfullscreen=“oallowfullscreen” webkitallowfullscreen=“webkitallowfullscreen”>
-                                </iframe>
-                            </div>`
 
+    let widgetContainer = document.createElement('div')
+    widgetContainer.setAttribute('id', 'darkblock-widget-embed')
+    widgetContainer.setAttribute('style', "padding: 5px; width:100%;")
 
-    importantMessageContainer.insertAdjacentHTML("afterend", iframeContainer)
+    let widgetScript = document.createElement('script')
+    widgetScript.setAttribute('type', 'module')
+    widgetScript.setAttribute('id', 'darkblockwidget-script')
+    widgetScript.setAttribute('data-config', `{'platform':'Solana', 'tokenId': '${tokenID}'}`)
+    widgetScript.setAttribute('src', chrome.runtime.getURL("darkblock-widget-latest.js") )
 
+    importantMessageContainer.insertAdjacentElement('afterend', widgetContainer)
+    document.body.appendChild(widgetScript)
 }
 
 /* Opensea works with dynamic pages. We have to track the URL change and only if that happens - attempt to append the iframe. */
@@ -65,12 +60,18 @@ const trackURLChange = () => {
             return
 
         appendIframeContainer()
-        
+
         oldURL = currentURL
 
     }, 1000)
 
 }
 
-appendIframeContainer()
-trackURLChange()
+const isloaded = () => {
+    window.onload = () => {
+        appendIframeContainer()
+        trackURLChange()
+    }
+}
+
+isloaded()
