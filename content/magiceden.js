@@ -44,7 +44,7 @@ const appendIframeContainer = async () => {
                                 <iframe
                                     style="border: none; height: 550px; width: 100%; padding: 5px;"
                                     title="darkblock"
-                                    src="https://app.darkblock.io/platform/sol/embed/viewer/${ tokenID }"
+                                    src="https://app.darkblock.io/platform/sol/embed/test/${ tokenID }"
                                     allowfullscreen=“allowfullscreen” mozallowfullscreen=“mozallowfullscreen” msallowfullscreen=“msallowfullscreen” oallowfullscreen=“oallowfullscreen” webkitallowfullscreen=“webkitallowfullscreen”>
                                 </iframe>
                             </div>`
